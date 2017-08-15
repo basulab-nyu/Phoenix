@@ -1,4 +1,4 @@
-function [rval_space,rval_time,ind_space,ind_time] = classify_comp_corr(Yr,A,C,b,f,options)
+function [rval_space,rval_time,ind_space,ind_time] = classify_comp_corr_noparpool(Yr,A,C,b,f,options)
 
 % Classify components by looking at how well the spatial and temporal components
 % correlate with the raw data at point of high activation
