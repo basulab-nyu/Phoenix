@@ -97,15 +97,15 @@ save(fullfile([nam(1:end-6),'Cdf']),'C_dec','C_df','F_dff','expDffMedZeroed','S'
 save(fullfile([nam(1:end-6),'ROI']),'Coor' ,'json_file', 'center', 'ROIvars', 'keep','A2','Cn_max', 'options');
 disp(['Done saving : ' listhdf5(session).name])
 
-output.([listhdf5(session).name(1:end-7)]).expDffMedZeroed= expDffMedZeroed;
-output.([listhdf5(session).name(1:end-7)]).C_df= C_df;
-output.([listhdf5(session).name(1:end-7)]).center=center;
-output.([listhdf5(session).name(1:end-7)]).Coor=Coor;
-output.([listhdf5(session).name(1:end-7)]).keep=keep;
-output.([listhdf5(session).name(1:end-7)]).Cn_max=Cn_max;
-output.([listhdf5(session).name(1:end-7)]).A2=A2;
+output.expDffMedZeroed= expDffMedZeroed;
+output.C_df= C_df;
+output.center=center;
+output.Coor=Coor;
+output.keep=keep;
+output.Cn_max=Cn_max;
+output.A2=A2;
 
-toc;
+
 
 
 
