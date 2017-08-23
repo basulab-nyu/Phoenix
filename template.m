@@ -28,7 +28,7 @@ template=[];
 %temp_sess=1; %template from session
 %load(([files{temp_sess}(1:end-5),'_MC_output']), 'template');
 
-for i=1:length(files) %MC all files
+for i=1:size(files,2) %MC all files
 %OR MC only sessions X, Y, ..
 %
 %sessions=10:12;
@@ -78,9 +78,9 @@ end
 
 %Save as tiff
 %name of the temporal downsampled (mean) image
-TSub_mean_name=[nam(1:end-4),'_Tsub_mean.tif']; 
+TSub_mean_name=[name(1:end-4),'_Tsub_mean.tif']; 
 %name of the temporal downsampled (correlation) image
-TSub_CN_name=[nam(1:end-4),'_Tsub_CN.tif'];
+TSub_CN_name=[name(1:end-4),'_Tsub_CN.tif'];
 saveastiff(int16(Y_ds), TSub_mean_name);
 saveastiff(Cn_Z, TSub_CN_name);
 end
