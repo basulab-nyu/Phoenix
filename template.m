@@ -59,19 +59,19 @@ disp(['Done saving : ' listhdf5(i).name])
 toc;
 
 % Perform temporal downsampling (mean)
-ndimsY = ndims(Y)-1;
-sY = size(Y);
+ndimsY = ndims(M)-1;
+sY = size(M);
 ds = sY(1:ndimsY);
 T = sY(end);
 Ts = floor(T/tsub);   
-Y_ds = squeeze(mean(reshape(Y(:, :, 1:(Ts*tsub)),ds(1), ds(2), tsub, Ts), 3));
+Y_ds = squeeze(mean(reshape(M(:, :, 1:(Ts*tsub)),ds(1), ds(2), tsub, Ts), 3));
 
 %Perform temporal downsampling (correlation);
 for ii=1:Ts;
 sfr=(tsub*ii)-tsub+1;
 endfr=tsub*ii;
 fr=[sfr; endfr];
-Ytemp=Y(:,:,fr(1):fr(2));
+Ytemp=M(:,:,fr(1):fr(2));
 Cntemp=correlation_image(Ytemp);
 Cn_Z(:,:,ii)=Cntemp;
 end
