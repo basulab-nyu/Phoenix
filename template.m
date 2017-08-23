@@ -19,6 +19,7 @@ FOV = [512,512];
 
 %% Set parameters
 options_rigid = NoRMCorreSetParms('d1',FOV(1),'d2',FOV(2),'bin_width',200,'max_shift',30,'us_fac',50, 'phase_flag', true);
+tsub=100; % temporal downsampling factor 
 
 %% MC and Downsample for drawing ROI 
 %Create a blank template for the 1st session to MC
