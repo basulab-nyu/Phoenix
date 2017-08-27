@@ -42,13 +42,12 @@ end
 
 %% update spatial components
 [A,b,Cin] = update_spatial_components(Yr,Cin,fin,[Ain,bin],P,options);
-
 %% update temporal components
 P.p = 2;    
-[C,f,P,S,YrA] = update_temporal_components(Yr,Ain,b,Cin,fin,P,options);
-
+[C,f,P,S,YrA] = update_temporal_components(Yr,A,b,Cin,fin,P,options);
 %% classify components
 [ROIvars.rval_space,ROIvars.rval_time,ROIvars.max_pr,ROIvars.sizeA,keep] = classify_components(Y,A,C,b,f,YrA,options);
+%[ROIvars.rval_space,ROIvars.rval_time,ROIvars.max_pr,ROIvars.sizeA,keep] = classify_components_noparpool(Y,A,C,b,f,YrA,options);
 % run GUI for modifying component selection (optional, close twice to save values)
 %run_GUI = true;
 %if run_GUI
@@ -59,8 +58,8 @@ P.p = 2;
 %end
 
 %% refine estimates excluding rejected components
-[A2,b2,C2] = update_spatial_components(Yr,C,f,[A,b],P,options);
-[C2,f2,P2,S2,YrA2] = update_temporal_components(Yr,A2,b2,C2,f,P,options);
+%[A2,b2,C2] = update_spatial_components(Yr,C,f,[A,b],P,options);
+%[C2,f2,P2,S2,YrA2] = update_temporal_components(Yr,A2,b2,C2,f,P,options);
 
 %% Extract DF/F 
 [C_df,~] = extract_DF_F(Yr,A2,C2,P2,options);

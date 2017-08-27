@@ -1,13 +1,11 @@
 clear;
 %% load all modules
 addpath(genpath(pwd))
-addpath(genpath('/ifs/data/basulab/MAD/MATLAB/ca_source_extraction')) %path to CNMF 
-addpath(genpath('/ifs/data/basulab/MAD/MATLAB/NoRMCorre')) %path to NorMCorre
-addpath(genpath('/ifs/data/basulab/MAD/MATLAB/scripts')) %path to Phoenix scripts
+addpath(genpath('/ifs/data/basulab/MAD/MATLAB/Phoenix')) %path to CNMF 
 
 %% load files 
 % Folder with stack images of diferent sessions
-foldername='E:\MAD_DATA\CA3_ThyGC6f\M6\test'; %path to image folder
+foldername='/ifs/data/basulab/MAD/DATA/CA3_ThyGC6f/M1/FOV1/'; %path to image folder
 cd(foldername);
 listfiles = dir('*.tif'); %will look for all the tif files
 % !!! Files are listed in alphabetical order !!!
@@ -18,7 +16,7 @@ end
 FOV = [512,512]; % Image resolution 
 d1=FOV(1);
 d2=FOV(2);
-ROI_file='E:\MAD_DATA\CA3_ThyGC6f\M6\test\ROI_1_2_3_4_5_7_M6.zip'; %path to ROI file (.zip)
+ROI_file='/ifs/data/basulab/MAD/DATA/CA3_ThyGC6f/M1/ROI/M1_FOV1.zip'; %path to ROI file (.zip)
 % Need ReadImageJROI.m script
 [a,ROI] = ReadImageJROI(ROI_file,[d1,d2]);
 % Create Structure
@@ -34,7 +32,6 @@ K = 1;                                           % number of components to be fo
 tau = 4;                                          % std of gaussian kernel (size of neuron)
 p = 2;                                            % order of autoregressive system (p = 0 no dynamics, p=1 just decay, p = 2, both rise and decay)
 merge_thr = 0.8;                                  % merging threshold
-
 options = CNMFSetParms(...
                        'd1',d1,'d2',d2,...                        % dimensions of datasets
                        'search_method','dilate','dist',3,...       % search locations when updating spatial components
@@ -51,15 +48,15 @@ input.param.p=p;
 input.param.merge_thr=merge_thr;
                   
 %% CNMF
+input.refine=0; %refine components 
 %Session to process
-%session=[1,2,3]; 
-
+%session=1; 
 %OR
 %all session
 session=1:size(files,2);
 
 for i=1:length(session)
-[output]= CNMF(input, session(i)); 
+[output]= CNMF_noparpool(input, session(i)); 
 end
 
 

@@ -32,7 +32,6 @@ K = 1;                                           % number of components to be fo
 tau = 4;                                          % std of gaussian kernel (size of neuron)
 p = 2;                                            % order of autoregressive system (p = 0 no dynamics, p=1 just decay, p = 2, both rise and decay)
 merge_thr = 0.8;                                  % merging threshold
-
 options = CNMFSetParms(...
                        'd1',d1,'d2',d2,...                        % dimensions of datasets
                        'search_method','dilate','dist',3,...       % search locations when updating spatial components
@@ -49,9 +48,9 @@ input.param.p=p;
 input.param.merge_thr=merge_thr;
                   
 %% CNMF
+input.refine=0; %refine components 
 %Session to process
 %session=1; 
-
 %OR
 %all session
 session=1:size(files,2);
