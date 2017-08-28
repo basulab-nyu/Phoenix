@@ -1,4 +1,4 @@
-function [output]= CNMF_noparpool(input, session);  
+function [output]= CNMF_noparpool_dendrites(input, session);  
 %% load structure
 foldername = input.foldername;
 files = input.image;
@@ -44,7 +44,7 @@ end
 P.p = 2;    
 [C,f,P,S,YrA] = update_temporal_components(Yr,A,b,Cin,fin,P,options);
 %% classify components
-[ROIvars.rval_space,ROIvars.rval_time,ROIvars.max_pr,ROIvars.sizeA,keep] = classify_components_noparpool(Y,A,C,b,f,YrA,options);
+%[ROIvars.rval_space,ROIvars.rval_time,ROIvars.max_pr,ROIvars.sizeA,keep] = classify_components_noparpool(Y,A,C,b,f,YrA,options);
 % run GUI for modifying component selection (optional, close twice to save values)
 %run_GUI = true;
 %if run_GUI

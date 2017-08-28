@@ -9,8 +9,8 @@ nam = '/Users/martial/Documents/test/1_M991_CTRL_MC.tif'; %Images to open
 FOV = [512,512]; % Image resolution 
 d1=FOV(1);
 d2=FOV(2);
-dend='/Users/martial/Desktop/PSAM_ROI/M991/dendrites_10micron_polygon.zip'; %path to ROI file (.zip)
-soma='/Users/martial/Desktop/PSAM_ROI/M991/soma_10micron_polygon.zip'; %path to ROI file (.zip)
+dend='/Users/martial/Desktop/PSAM_ROI/M991/soma&dendrites/1_2_dendrites.zip'; %path to ROI file (.zip)
+%soma='/Users/martial/Desktop/PSAM_ROI/M991/soma_10micron_polygon.zip'; %path to ROI file (.zip)
 [~,ROI_dend] = ReadImageJROI(dend,[d1,d2]);
 [~,ROI_soma] = ReadImageJROI(soma,[d1,d2]);
 %Open image

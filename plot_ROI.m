@@ -3,6 +3,15 @@
 addpath(genpath('/Users/martial/Documents/GitHub/Phoenix'));
 addpath(genpath('/Users/martial/Documents/GitHub/Canalysis'));
 
+%% Open mat files with ROI
+
+%For multiple files
+listmat = dir('*.mat'); %will look for all the mat files
+for i = 1:length(listmat)
+ROI{i} = load((listmat(i).name));
+end
+
+
 %% Import tif image or use Cn
 import_tif=0;
 if import_tif==1
