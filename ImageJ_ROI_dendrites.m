@@ -27,20 +27,21 @@ input.ROI.file=ROI;
 input.ROI.a=a;
 input.param.FOV=FOV;
 
-%% Set parameters soma
-K = 1;                                           % number of components to be found
-tau = 4;                                          % std of gaussian kernel (size of neuron)
-p = 2;                                            % order of autoregressive system (p = 0 no dynamics, p=1 just decay, p = 2, both rise and decay)
+%% Set parameters dendrites
+K = 2;                                           % number of components to be found
+tau = [];                                         % std of gaussian kernel (size of neuron - not needed for dendritic data) 
+p = 0;                                            % No AR dynamics for dendritic data
 merge_thr = 0.8;                                  % merging threshold
-options = CNMFSetParms(...
-                       'd1',d1,'d2',d2,...                        % dimensions of datasets
-                       'search_method','dilate','dist',3,...       % search locations when updating spatial components
-                       'deconv_method','constrained_foopsi',...    % activity deconvolution method
-                       'temporal_iter',2,...                       % number of block-coordinate descent steps
-                       'fudge_factor',0.98,...                     % bias correction for AR coefficients
-                       'merge_thr',merge_thr,...                    % merging threshold
-                       'gSig',tau...
-                       );
+options = CNMFSetParms(...                      
+    'd1',d1,'d2',d2,...                           % dimensions of datasets
+    'init_method','HALS',...                      % initialize algorithm with plain NMF  
+    'max_iter_hals_in',50,...                     % maximum number of iterations
+    'search_method','dilate',...                  % search locations when updating spatial components
+    'temporal_iter',2,...                         % number of block-coordinate descent steps 
+    'merge_thr',0.9,...                           % merging threshold
+    'conn_comp',false,...                         % do not limit to largest connected component for each found component
+    'maxthr',0.05...                              % for every component set pixels that are below max_thr*max_value to 0 
+    );
 % Create Structure                
 input.param.options=options;
 input.param.tau=tau;
@@ -48,6 +49,7 @@ input.param.p=p;
 input.param.merge_thr=merge_thr;
                   
 %% CNMF
+input.refine=0; %refine components 
 input.refine=0; %refine components 
 %Session to process
 %session=1; 
